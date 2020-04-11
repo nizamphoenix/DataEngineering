@@ -1,3 +1,7 @@
+'''
+This is a driver defining pipeline to run on GCP's DataFlow runner.
+This driver defines inputs, transforms, and outputs that constitute the pipeline.
+'''
 import apache_beam as beam
 from apache_beam.options.pipeline_options import PipelineOptions
 
