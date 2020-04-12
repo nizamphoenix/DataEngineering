@@ -51,3 +51,33 @@ class ExtractAndProcess(beam.PTransform):
         pcoll
         | beam.Map(lambda x: (x[self.field], x['score']))
         | beam.CombinePerKey(sum))
+  
+  
+def run(argv=None, save_main_session=True):
+
+  parser = argparse.ArgumentParser()
+  parser.add_argument(
+      '--input',
+      type=str,
+      default='**************',
+      help='absolute path to data files.')
+  parser.add_argument(
+      '--output', type=str, required=True, help='Path to the output file(s).')
+
+  args, pipeline_args = parser.parse_known_args(argv)
+
+  options = PipelineOptions(pipeline_args)
+  options.view_as(SetupOptions).save_main_session = save_main_session
+
+  with beam.Pipeline(options=options) as p:
+
+    def format_user_score_sums(user_score):
+      (user, score) = user_score
+      return 'user: %s, total_score: %s' % (user, score)
+
+    (  # pylint: disable=expression-not-assigned
+        p
+        | 'ReadInputText' >> beam.io.ReadFromText(args.input)
+        | 'UserScore' >> UserScore()
+        | 'FormatUserScoreSums' >> beam.Map(format_user_score_sums)
+        | 'WriteUserScoreSums' >> beam.io.WriteToText(args.output))
