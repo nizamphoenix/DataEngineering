@@ -33,5 +33,21 @@ with beam.Pipeline(options=PipelineOptions()) as p:
   | beam.combiners.Count.PerElement()
   | beam.MapTuple(lambda word, count: '%s: %s' % (word, count))
   | beam.io.WriteToText('gs://my-bucket/counts.txt')
-
   result = p.run()
+  
+  
+class ExtractAndProcess(beam.PTransform):
+  """
+  A transform to extract key/score information and sum the scores.
+  The constructor argument `field` determines whether 'team' or 'user' info is extracted.
+  """
+  def __init__(self, field):
+    super().__init__()
+    beam.PTransform.__init__(self)
+    self.field = field
+
+  def expand(self, pcoll):
+    return (
+        pcoll
+        | beam.Map(lambda x: (x[self.field], x['score']))
+        | beam.CombinePerKey(sum))
