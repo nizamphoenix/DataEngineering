@@ -36,7 +36,7 @@ with beam.Pipeline(options=PipelineOptions()) as p:
   result = p.run()
   
   
-class ExtractAndProcess(beam.PTransform):
+class ExtractAndFormat(beam.PTransform):
   """
   A transform to extract key/score information and sum the scores.
   The constructor argument `field` determines whether 'team' or 'user' info is extracted.
@@ -75,9 +75,9 @@ def run(argv=None, save_main_session=True):
       (user, score) = user_score
       return 'user: %s, total_score: %s' % (user, score)
 
-    (  # pylint: disable=expression-not-assigned
+    ( 
         p
         | 'ReadInputText' >> beam.io.ReadFromText(args.input)
-        | 'UserScore' >> UserScore()
-        | 'FormatUserScoreSums' >> beam.Map(format_user_score_sums)
-        | 'WriteUserScoreSums' >> beam.io.WriteToText(args.output))
+        | 'UserReport' >> UserReport()
+        | 'FormatPattientReports' >> beam.Map(format_patient_reports)
+        | 'WriteUserReports' >> beam.io.WriteToText(args.output))
