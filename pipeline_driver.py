@@ -38,8 +38,7 @@ with beam.Pipeline(options=PipelineOptions()) as p:
   
 class ExtractAndFormat(beam.PTransform):
   """
-  A transform to extract key/score information and sum the scores.
-  The constructor argument `field` determines whether 'team' or 'user' info is extracted.
+  A composite transform to extract and format patient information.
   """
   def __init__(self, field):
     super().__init__()
