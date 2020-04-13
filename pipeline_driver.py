@@ -61,7 +61,10 @@ def run(argv=None, save_main_session=True):
       default='**************',
       help='absolute path to data files.')
   parser.add_argument(
-      '--output', type=str, required=True, help='Path to the output file(s).')
+      '--output', 
+      type=str, 
+    required=True, 
+    help='Path to the output file(s).')
 
   args, pipeline_args = parser.parse_known_args(argv)
 
@@ -74,7 +77,7 @@ def run(argv=None, save_main_session=True):
       (user, score) = user_score
       return 'user: %s, total_score: %s' % (user, score)
 
-    ( 
+    (   
         p
         | 'ReadInputText' >> beam.io.ReadFromText(args.input)
         | 'UserReport' >> UserReport()
