@@ -64,10 +64,8 @@ class HourlyPatientAdmissions(beam.PTransform):
       type=str,
       default='2100-01-01-00-00',
       help='String representation of the first minute for '
-      'which to generate results in the format: '
-      'yyyy-MM-dd-HH-mm. Any input data timestamped '
-      'after to that minute won\'t be included in the '
-      'sums.')
+      'admitting the patient: '
+      'yyyy-MM-dd-HH-mm')
 
   args, pipeline_args = parser.parse_known_args(argv)
 
@@ -84,15 +82,15 @@ class HourlyPatientAdmissions(beam.PTransform):
     (  # pylint: disable=expression-not-assigned
         p
         | 'ReadInputText' >> beam.io.ReadFromText(args.input)
-        | 'HourlyTeamScore' >> HourlyTeamScore(
+        | 'HourlyAdmissions' >> HourlyTeamScore(
             args.start_min, args.stop_min, args.window_duration)
-        | 'TeamScoresDict' >> beam.ParDo(TeamScoresDict())
+        | 'AdmissionsDict' >> beam.ParDo(TeamScoresDict())
         | 'WriteTeamScoreSums' >> WriteToBigQuery(
             args.table_name,
             args.dataset,
             {
-                'team': 'STRING',
-                'total_score': 'INTEGER',
+                'hour_window': 'STRING',
+                'total_admissions': 'INTEGER',
                 'window_start': 'STRING',
             },
             options.view_as(GoogleCloudOptions).project))
