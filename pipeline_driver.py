@@ -82,5 +82,5 @@ def run(argv=None, save_main_session=True):
         | 'ReadInputText' >> beam.io.ReadFromText(args.input)
         | 'UserReport' >> UserReport()
         | 'FormatPattientReports' >> beam.Map(format_patient_reports)
-        | 'WriteUserReports' >> beam.io.WriteToText(args.output))
+        | 'WriteUserReports' >> beam.io.WriteToText(args.output)
     )
