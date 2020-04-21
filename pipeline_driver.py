@@ -13,6 +13,9 @@ python scores.py \
     --region $REGION_ID \
     --temp_location gs://$BUCKET/scores/temp
 '''
+
+# Credits: googlecloudtraining
+
 from __future__ import absolute_import
 from __future__ import division
 
