@@ -1,5 +1,6 @@
 This is a repository for creating pipelines using Apache Beam's Python SDK with GCP DataFlow Runner.  
-Apache Beam is a unified framework for creating batch and streaming pipelines.  
+
+**Apache Beam** is a unified framework for creating batch and streaming pipelines.  
 Notes:-  
 -program to create a pipeline: pipeline driver  
 -pipeline driver defines inputs, transforms, and outputs that constitute the pipeline.  
