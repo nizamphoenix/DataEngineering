@@ -79,7 +79,7 @@ class HourlyPatientAdmissions(beam.PTransform):
   options.view_as(SetupOptions).save_main_session = save_main_session
 
   with beam.Pipeline(options=options) as p:
-    (  # pylint: disable=expression-not-assigned
+    (  
         p
         | 'ReadInputText' >> beam.io.ReadFromText(args.input)
         | 'HourlyAdmissions' >> HourlyTeamScore(
