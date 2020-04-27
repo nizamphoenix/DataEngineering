@@ -22,8 +22,7 @@ class HourlyPatientAdmissions(beam.PTransform):
         | 'FixedWindowsTeam' >> beam.WindowInto(
             beam.window.FixedWindows(self.window_duration_in_seconds))
 
-        # Extract and sum teamname/score pairs from the event data.
-        | 'ExtractAndSumScore' >> ExtractAndSumScore('team'))
+      
  
 
   def run(argv=None, save_main_session=True):
