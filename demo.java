@@ -91,7 +91,7 @@ public class AverageSpeeds {
           }
         }));
 
-    PCollection<KV<String, Double>> avgSpeed = currentConditions //
+    PCollection<KV<String, Double>> avgSpeed = currentConditions 
         .apply("TimeWindow",
             Window.into(SlidingWindows//
                 .of(averagingInterval)//
