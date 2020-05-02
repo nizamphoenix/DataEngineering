@@ -10,7 +10,7 @@ Notes:-
 -DoFn: class extended to define ParDo transforms which are suitable for parallel tasks like extracting,formating data, process method is overridden.  
 
 **Reading data into pipeline:-**  
-1.reading data using beam's api: O/p PCollection = pipeline | beamAPI(i/p PCollection)  
-lines = p | 'ReadMyFile' >> beam.io.ReadFromText('gs://path_to_file_in_gcs')  
-2.reading data from system's memory: O/p PCollection = pipeline | PCTransform(i/p PCollection)  
-lines = (p | beam.Create(somedata))  
+1. reading data using beam's api: O/p PCollection = pipeline | beamAPI(i/p PCollection)  
+   ex:- lines = p | 'ReadMyFile' >> beam.io.ReadFromText('gs://path_to_file_in_gcs')  
+2. reading data from system's memory: O/p PCollection = pipeline | PCTransform(i/p PCollection)  
+   ex:- lines = (p | beam.Create(somedata))  
