@@ -22,13 +22,53 @@ patient_count = (
     p
     | 'ReadTable' >> beam.io.Read(beam.io.BigQuerySource(table_spec))
     | beam.Map(lambda elem: elem['patient_count'])
-    )
+)
 
 # 2. reads only the query string and then extracts the patient_count column
 patient_count = (
     p
     | 'QueryTable' >> beam.io.Read(beam.io.BigQuerySource(
         query='SELECT patient_count FROM '\
-              '[project_name:bigquery_dataset_name.bigquery_table_name]'))
+              '`project_name:bigquery_dataset_name.bigquery_table_name`',
+        use_standard_sql=True#set to False if legacy SQL [] is used
+    ))
     | beam.Map(lambda elem: elem['patient_count'])
-    )
+)
+
+#3. When writing to BigQuery, the following information must be provided:
+'''
+1.destination table name.
+2.The destination table’s "create" disposition. 
+   - controls whether or not BigQuery write operation should 
+       i)create a table if the destination table does not exist(BigQueryDisposition.CREATE_IF_NEEDED); also a schema needs
+         to be provided if not provided then fails at runtime, or
+      ii)If the destination table does not exist, the write operation fails.(BigQueryDisposition.CREATE_NEVER)
+3.The destination table’s "write" disposition. 
+   -The write disposition specifies whether the data you write will 
+       i)replace an existing table(BigQueryDisposition.WRITE_TRUNCATE), 
+      ii)append rows to an existing table(BigQueryDisposition.WRITE_APPEND), or 
+     iii)write only to an empty table(BigQueryDisposition.WRITE_EMPTY).
+'''
+table_schema = {
+    'fields': [{
+        'name': 'patient_name', 'type': 'STRING', 'mode': 'REQUIRED'
+    }, {
+        'name': 'age', 'type': 'INTEGER', 'mode': 'REQUIRED'
+    }]
+}
+records = p | beam.Create([ #PCollection of dictionaries, each is a row
+    {
+        'patient_name': 'Spoc', 'age': 67
+    },
+    {
+        'patient_name': 'Yoda', 'age': 30
+    },
+])
+
+
+records | beam.io.WriteToBigQuery(
+    table_spec,
+    schema=table_schema,
+    write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE,
+    create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED
+)
