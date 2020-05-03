@@ -14,3 +14,8 @@ Notes:-
    ex:- lines = p | 'ReadMyFile' >> beam.io.ReadFromText('gs://path_to_file_in_gcs')  
 2. reading data from system's memory: O/p PCollection = pipeline | PCTransform(i/p PCollection)  
    ex:- lines = (p | beam.Create(somedata))  
+
+**Writing data to BigQuery with DataFlow**  
+1.destination table name.  
+2.The destination table’s "create" disposition.  
+   - controls whether or not BigQuery write operation should   
