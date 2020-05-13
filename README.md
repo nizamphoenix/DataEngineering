@@ -11,11 +11,16 @@ Notes:-
 
 **Reading data into pipeline:-**  
 1. reading data using beam's api: O/p PCollection = pipeline | beamAPI(i/p PCollection)  
-   ex:- lines = p | 'ReadMyFile' >> beam.io.ReadFromText('gs://path_to_file_in_gcs')  
+   ex:- `lines = p | 'ReadMyFile' >> beam.io.ReadFromText('gs://path_to_file_in_gcs')`    
 2. reading data from system's memory: O/p PCollection = pipeline | PCTransform(i/p PCollection)  
-   ex:- lines = (p | beam.Create(somedata))  
+   ex:- `lines = (p | beam.Create(somedata))`    
 
 **Writing data to BigQuery with DataFlow**  
+Beam SDK includes built-in transforms that can read data from and write data to Google BigQuery tables.
+BigQueryIO read and write transforms produce and consume data as a PCollection of dictionaries, 
+where each element in the PCollection represents a single row in the table.   
+Install relevant sdk with `pip install apache-beam[gcp]`  
+
 1.destination table name.  
 2.The destination table’s "create" disposition.  
    -controls whether or not BigQuery write operation should   
@@ -27,3 +32,6 @@ Notes:-
        i) replace an existing table(BigQueryDisposition.WRITE_TRUNCATE),  
       ii) append rows to an existing table(BigQueryDisposition.WRITE_APPEND), or  
      iii) write only to an empty table(BigQueryDisposition.WRITE_EMPTY).  
+
+
+
