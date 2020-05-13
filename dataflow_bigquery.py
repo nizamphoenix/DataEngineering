@@ -1,12 +1,3 @@
-'''
-Using Dataflow to read from and write to BigQuery.
-Beam SDK includes built-in transforms that can read data from and write data to Google BigQuery tables.
-BigQueryIO read and write transforms produce and consume data as a PCollection of dictionaries, 
-where each element in the PCollection represents a single row in the table.
-
-
-use pip install apache-beam[gcp] to use BigQuery I/O
-'''
 
 
 from apache_beam.io.gcp.internal.clients import bigquery
