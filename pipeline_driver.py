@@ -5,7 +5,6 @@ Batch processing pipeline:-
 3.Applying composite transforms to compute useful information--scores.
 4.writing output to a text file.
 
-# Using DataflowRunner
 python scores.py \
     --output gs://$BUCKET/scores/output \
     --runner DataflowRunner \
@@ -14,7 +13,7 @@ python scores.py \
     --temp_location gs://$BUCKET/scores/temp
 '''
 
-# Credits: googlecloudtraining
+# source: googlecloudtraining
 
 from __future__ import absolute_import
 from __future__ import division
@@ -30,18 +29,15 @@ from apache_beam.options.pipeline_options import SetupOptions
 
 
 class ParseGameEventFn(beam.DoFn):
-  """Parses the raw game event info into a Python dictionary.
-  Each event line has the following format:
-    username,teamname,score,timestamp_in_ms,readable_time
-  e.g.:
-    user2_AsparagusPig,AsparagusPig,10,1445230923951,2015-11-02 09:09:28.224
-  The human-readable time string is not used here.
+  """
+  Recommended when data processing, such as first stage, can be done in parallel
   """
   def __init__(self):
     beam.DoFn.__init__(self)
     self.num_parse_errors = Metrics.counter(self.__class__, 'num_parse_errors')
 
   def process(self, elem):
+    #overridden method from DoFn, called implicitly when this class is instantiated
     try:
       row = list(csv.reader([elem]))[0]
       yield {       #using yield is efficient,avoids memory explosion
@@ -60,13 +56,13 @@ class ParseGameEventFn(beam.DoFn):
 class ExtractAndSumScore(beam.PTransform):
   """
   A transform to extract key/score information and sum the scores.
-  The constructor argument `field` determines whether 'team' or 'user' info is extracted.
   """
   def __init__(self, field):
     beam.PTransform.__init__(self)
-    self.field = field
+    self.field = field #determines whether 'team' or 'user' info is extracted.
 
   def expand(self, pcoll):
+    #expand() function is overrided from PTransform, and is called implicitly when constructor of this class is invoked
     return (
         pcoll
         | beam.Map(lambda elem: (elem[self.field], elem['score']))
@@ -77,6 +73,7 @@ class ExtractAndSumScore(beam.PTransform):
 
 class UserScore(beam.PTransform):
   def expand(self, pcoll):
+    #expand() function is overrided from PTransform
     return (
         pcoll
         | 'ParseGameEventFn' >> beam.ParDo(ParseGameEventFn())
@@ -85,6 +82,12 @@ class UserScore(beam.PTransform):
     )
 
 
+def format_user_score_sums(user_score):
+    '''
+    utility function
+    '''
+    (user, score) = user_score
+    return 'user: %s, total_score: %s' % (user, score)
 
 def run(argv=None, save_main_session=True):
   """Main entry point; defines and runs the user_score pipeline."""
@@ -97,8 +100,7 @@ def run(argv=None, save_main_session=True):
       type=str,
       default='gs://apache-beam-samples/game/gaming_data*.csv',
       help='Path to the data file(s) containing game data.')
-  parser.add_argument(
-      '--output', type=str, required=True, help='Path to the output file(s).')
+  parser.add_argument('--output', type=str, required=True, help='Path to the output file(s).')
 
   args, pipeline_args = parser.parse_known_args(argv)
 
@@ -109,17 +111,12 @@ def run(argv=None, save_main_session=True):
   options.view_as(SetupOptions).save_main_session = save_main_session
 
   with beam.Pipeline(options=options) as p:
-
-    def format_user_score_sums(user_score):
-      (user, score) = user_score
-      return 'user: %s, total_score: %s' % (user, score)
-
     (  
         p
-        | 'ReadInputText' >> beam.io.ReadFromText(args.input)#Step1
-        | 'UserScore' >> UserScore()#Step2
-        | 'FormatUserScoreSums' >> beam.Map(format_user_score_sums)#Step3
-        | 'WriteUserScoreSums' >> beam.io.WriteToText(args.output)#Step4
+        | 'ReadInputText' >> beam.io.ReadFromText(args.input)       #reading input from local machine.
+        | 'UserScore' >> UserScore()                                #Extracting data with ParDo transfrom.
+        | 'FormatUserScoreSums' >> beam.Map(format_user_score_sums) #Applying composite transforms to compute useful information.
+        | 'WriteUserScoreSums' >> beam.io.WriteToText(args.output)  #writing output to a text file.
     )
 
 if __name__ == '__main__':
