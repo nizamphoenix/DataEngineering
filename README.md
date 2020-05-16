@@ -23,16 +23,14 @@ Install relevant sdk with `pip install apache-beam[gcp]`
 
 The following are required to facilitate the transfer:-  
 - destination table name.  
-- The destination table’s "create" disposition.  
-   - controls whether or not BigQuery write operation should,     
-       - create a table if the destination table does not exist(BigQueryDisposition.CREATE_IF_NEEDED);  
+- The destination table’s "create" disposition: controls whether or not BigQuery write operation should,     
+  -  create a table if the destination table does not exist(BigQueryDisposition.CREATE_IF_NEEDED);  
        also a schema needs to be provided if not then fails at runtime, or  
-       - If the destination table does not exist, the write operation fails.(BigQueryDisposition.CREATE_NEVER)  
-- The destination table’s "write" disposition.  
-   - The write disposition specifies whether the data you write will.    
-       - replace an existing table(BigQueryDisposition.WRITE_TRUNCATE),  
-       - append rows to an existing table(BigQueryDisposition.WRITE_APPEND), or  
-       - write only to an empty table(BigQueryDisposition.WRITE_EMPTY).  
+  -  If the destination table does not exist, the write operation fails.(BigQueryDisposition.CREATE_NEVER)  
+- The destination table’s "write" disposition: controls whether the data you write will.    
+  -  replace an existing table(BigQueryDisposition.WRITE_TRUNCATE),  
+  -  append rows to an existing table(BigQueryDisposition.WRITE_APPEND), or  
+  -  write only to an empty table(BigQueryDisposition.WRITE_EMPTY).  
 
 
 
