@@ -1,7 +1,7 @@
 This is a repository for creating pipelines using Apache Beam's Python SDK with GCP DataFlow Runner.  
 Notes:-  
 
-**Apache Beam** is a unified framework for creating batch and streaming pipelines.  
+*Apache Beam* is a unified framework for creating batch and streaming pipelines.  
 - program to create a pipeline: pipeline driver  
 - pipeline driver defines inputs, transforms, and outputs that constitute the pipeline.  
 - A pipeline runs on a runner: runitme engine that executes pipelines like DataFlow(GCP), samza, flink etc  
@@ -15,7 +15,7 @@ Notes:-
 - reading data from system's memory: O/p PCollection = pipeline | PCTransform(i/p PCollection)  
    ex:- `lines = (p | beam.Create(somedata))`    
 
-**Writing data to BigQuery with DataFlow**  
+**Writing data to BigQuery with DataFlow:-**  
 Beam SDK includes built-in transforms that can read data from and write data to Google BigQuery tables.
 BigQueryIO read and write transforms produce and consume data as a PCollection of dictionaries, 
 where each element in the PCollection represents a single row in the table.   
