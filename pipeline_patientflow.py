@@ -1,4 +1,11 @@
+import argparse
+import csv
+import logging
 
+import apache_beam as beam
+from apache_beam.metrics.metric import Metrics
+from apache_beam.options.pipeline_options import PipelineOptions
+from apache_beam.options.pipeline_options import SetupOptions
 
 class ParseGameEventFn(beam.DoFn):
   """
@@ -6,17 +13,17 @@ class ParseGameEventFn(beam.DoFn):
   """
   def __init__(self):
     beam.DoFn.__init__(self)
-    self.num_parse_errors = Metrics.counter(self.__class__, 'num_parse_errors')
+    self.num_parse_errors = Metrics.counter(self.__class__, 'parse_errors')
 
   def process(self, elem):
     #overridden method from DoFn, called implicitly when this class is instantiated
     try:
       row = list(csv.reader([elem]))[0]
       yield {       #using yield is efficient,avoids memory explosion
-          'user': row[0],
-          'team': row[1],
-          'score': int(row[2]),
-          'timestamp': int(row[3]) / 1000.0,#converting to seconds
+          'id': row[0],
+          'name': row[1],
+          'age': int(row[2]),
+          'admission_timestamp': int(row[3]) / 1000.0,#converting to seconds
       }
     except:
       # Log and count parse errors
