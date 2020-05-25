@@ -1,7 +1,6 @@
 import argparse
 import csv
 import logging
-
 import apache_beam as beam
 from apache_beam.metrics.metric import Metrics
 from apache_beam.options.pipeline_options import PipelineOptions
@@ -9,7 +8,7 @@ from apache_beam.options.pipeline_options import SetupOptions
 
 class ParseGameEventFn(beam.DoFn):
   """
-  Recommended when data processing, such as first stage, can be done in parallel
+  Recommended for  data processing tasks that can be paralleilised
   """
   def __init__(self):
     beam.DoFn.__init__(self)
