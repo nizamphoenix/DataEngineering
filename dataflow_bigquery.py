@@ -34,6 +34,8 @@ a = {
         'name': 'age', 'type': 'INTEGER', 'mode': 'REQUIRED'
     }]
 }
+
+
 records = p | beam.Create([ #PCollection of dictionaries, each is a row
     {
         'patient_name': 'Spoc', 'age': 67
@@ -42,8 +44,6 @@ records = p | beam.Create([ #PCollection of dictionaries, each is a row
         'patient_name': 'Yoda', 'age': 30
     },
 ])
-
-
 records | beam.io.WriteToBigQuery(
     table_spec,
     schema=table_schema,
