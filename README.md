@@ -9,11 +9,13 @@ Notes:-
 - PTransform: class extended to define transforms, expand method is overridden.  
 - DoFn: class extended to define ParDo transforms which are suitable for parallel tasks like extracting,formating data, process method is overridden.  
 
-**Reading data into pipeline:-**  
+**Reading data into DataFlow pipeline:-**  
 - reading data using beam's api: O/p PCollection = pipeline | beamAPI(i/p PCollection)  
    ex:- `lines = p | 'ReadMyFile' >> beam.io.ReadFromText('gs://path_to_file_in_gcs')`    
 - reading data from system's memory: O/p PCollection = pipeline | PCTransform(i/p PCollection)  
    ex:- `lines = (p | beam.Create(somedata))`    
+- reading data, specifically, from Pub/Sub: O/p PCollection = pipeline | beamAPI(i/p PCollection)  
+   ex:- `lines = (p | beam.io.ReadStringsFromPubSub(topic=*topicname*))`  
 
 **Writing data to BigQuery with DataFlow:-**  
 Beam SDK includes built-in transforms that can read data from and write data to Google BigQuery tables.
