@@ -15,7 +15,7 @@ Notes:-
 - reading data from system's memory: O/p PCollection = pipeline | PCTransform(i/p PCollection)  
    ex:- `lines = (p | beam.Create(somedata))`    
 - reading data, specifically, from Pub/Sub: O/p PCollection = pipeline | beamAPI(i/p PCollection)  
-   ex:- `lines = (p | beam.io.ReadStringsFromPubSub(topic=*topicname*))`  
+   ex:- `lines = (p | beam.io.ReadStringsFromPubSub(topic= projectid.topicname ))`  
 
 **Writing data to BigQuery with DataFlow:-**  
 Beam SDK includes built-in transforms that can read data from and write data to Google BigQuery tables.
