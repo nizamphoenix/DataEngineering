@@ -12,7 +12,7 @@ Notes:-
 **Reading data into DataFlow pipeline:-**  
 - reading data using beam's api: O/p PCollection = pipeline | beamAPI(i/p PCollection)  
    ex:- `lines = p | 'ReadMyFile' >> beam.io.ReadFromText('gs://path_to_file_in_gcs')`    
-- reading data from system's memory: O/p PCollection = pipeline | PCTransform(i/p PCollection)  
+- creating & reading data from system's memory: O/p PCollection = pipeline | PCTransform(i/p PCollection)  
    ex:- `lines = (p | beam.Create(somedata))`    
 - reading data, specifically, from Pub/Sub: O/p PCollection = pipeline | beamAPI(i/p PCollection)  
    ex:- `lines = (p | beam.io.ReadStringsFromPubSub(topic= projectid.topicname ))`  
