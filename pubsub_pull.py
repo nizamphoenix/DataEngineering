@@ -1,8 +1,8 @@
 '''
 Messages are pulled from Pub/Sub by a subscriber and acknowledged
-Step1: install pubsub sudo pip install --upgrade google-cloud-pubsub
-Step2: create topic with gcloud pubsub topics create topic_name
-Step3: subscribe to topic created in Step2 with gcloud pubsub subscriptions create subscriber_name --topic=topic_name
+Step1: install pubsub `sudo pip install --upgrade google-cloud-pubsub`
+Step2: create topic with `gcloud pubsub topics create topic_name`
+Step3: subscribe to topic created in Step2 with `gcloud pubsub subscriptions create subscriber_name --topic=topic_name`
 '''
 
 from google.cloud import pubsub_v1
