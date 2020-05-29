@@ -34,9 +34,15 @@ The following are required to facilitate the transfer:-
   -  append rows to an existing table(BigQueryDisposition.WRITE_APPEND), or  
   -  write only to an empty table(BigQueryDisposition.WRITE_EMPTY).  
 
-**Data transfer to & fro Cloud storage**
+**Data transfer to & from Cloud storage**
 - Cloud storage connector facilitates high speed transfers, hence used by Dataproc to execute spark & hadoop jobs  
 - Transfer appliance  
 - Storage transfer service  
 - gsutil 
 - distcp, running on cloud storage connector
+
+
+**Preemptible worker nodes in Dataproc**
+- Only use preemptible nodes for jobs that are fault-tolerant or low priority ones such that occasional job failure won't disrupt the business.  
+- In general, the more preemptible nodes used relative to standard nodes, the higher the chances are that the job won't have enough nodes to complete the task. The best ratio of preemptible to regular nodes for a job can be found by experimenting with different ratios and analyzing the results.  
+- SSDs are not available on preemptible worker nodes. If SSDs are used on dedicated nodes, then any preemptible worker nodes used will have no SSDs available.  
