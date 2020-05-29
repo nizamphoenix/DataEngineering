@@ -7,7 +7,6 @@ table_spec = bigquery.TableReference(
     datasetId='bigquery_dataset_name',
     tableId='bigquery_table_name')
 
-
 # 1. reads an entire table that contains patient data and then extracts the patient_count column
 patient_count = (
     p
