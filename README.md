@@ -35,8 +35,8 @@ The following are required to facilitate the transfer:-
   -  write only to an empty table(BigQueryDisposition.WRITE_EMPTY).  
 
 **Data transfer to & fro Cloud storage**
-- Cloud connector facilitates high speed transfers, hence used by Dataproc to execute spark & hadoop jobs  
+- Cloud storage connector facilitates high speed transfers, hence used by Dataproc to execute spark & hadoop jobs  
 - Transfer appliance  
 - Storage transfer service  
 - gsutil 
-- distcp, running on cloud connector
+- distcp, running on cloud storage connector
