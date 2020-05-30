@@ -2,7 +2,7 @@ This is a repository for creating pipelines using Apache Beam's Python SDK with 
 
 Notes:-  
 
-*Apache Beam* is a unified framework for creating batch and streaming pipelines.  
+**Apache Beam** is a unified framework for creating batch and streaming pipelines.  
 - program to create a pipeline: pipeline driver  
 - pipeline driver defines inputs, transforms, and outputs that constitute the pipeline.  
 - A pipeline runs on a runner: runitme engine that executes pipelines like DataFlow(GCP), samza, flink etc  
@@ -10,7 +10,7 @@ Notes:-
 - PTransform: class extended to define transforms, expand method is overridden.  
 - DoFn: class extended to define ParDo transforms which are suitable for parallel tasks like extracting,formating data, process method is overridden.  
 
-**Reading data into DataFlow pipeline:-**  
+### Reading data into DataFlow pipeline:-
 - reading data using beam's api: O/p PCollection = pipeline | beamAPI(i/p PCollection)  
    ex:- `lines = p | 'ReadMyFile' >> beam.io.ReadFromText('gs://path_to_file_in_gcs')`    
 - creating & reading data from system's memory: O/p PCollection = pipeline | PCTransform(i/p PCollection)  
@@ -18,7 +18,7 @@ Notes:-
 - reading data, specifically, from Pub/Sub: O/p PCollection = pipeline | beamAPI(i/p PCollection)  
    ex:- `lines = (p | beam.io.ReadStringsFromPubSub(topic= projectid.topicname ))`  
 
-**Writing data to BigQuery with DataFlow:-**  
+### Writing data to BigQuery with DataFlow:-  
 Beam SDK includes built-in transforms **BigQuery I/O connector** that can read data from and write data to Google BigQuery tables.
 BigQueryIO read and write transforms produce and consume data as a PCollection of dictionaries, 
 where each element in the PCollection represents a single row in the table.   
@@ -35,15 +35,15 @@ The following are required to facilitate the transfer:-
   -  append rows to an existing table(BigQueryDisposition.WRITE_APPEND), or  
   -  write only to an empty table(BigQueryDisposition.WRITE_EMPTY).  
 
-**Data transfer to & from Cloud storage**
-- Cloud storage connector facilitates high speed transfers, hence used by Dataproc to execute spark & hadoop jobs  
-- Transfer appliance  
-- Storage transfer service  
+### Data transfer to & from Cloud storage  
+- Transfer appliance, for one time transfers  
+- Storage transfer service, for regular, or transfers from other cloud vendors  
 - gsutil 
-- distcp, running on cloud storage connector
+- distcp, running on cloud storage connector  
+- *note:-* Cloud storage connector facilitates high speed transfers, and is used by many GCP services to execute commands to execute tasks like Dataproc to execute spark & hadoop jobs  
 
 
-**Preemptible worker nodes in Dataproc**
+### Preemptible worker nodes in Dataproc  
 - Only use preemptible nodes for jobs that are fault-tolerant or low priority ones such that occasional job failure won't disrupt the business.  
 - In general, the more preemptible nodes used relative to standard nodes, the higher the chances are that the job won't have enough nodes to complete the task. The best ratio of preemptible to regular nodes for a job can be found by experimenting with different ratios and analyzing the results.  
 - SSDs are not available on preemptible worker nodes. If SSDs are used on dedicated nodes, then any preemptible worker nodes used will have no SSDs available.  
