@@ -19,7 +19,7 @@ Notes:-
    ex:- `lines = (p | beam.io.ReadStringsFromPubSub(topic= projectid.topicname ))`  
 
 **Writing data to BigQuery with DataFlow:-**  
-Beam SDK includes built-in transforms that can read data from and write data to Google BigQuery tables.
+Beam SDK includes built-in transforms **BigQuery I/O connector** that can read data from and write data to Google BigQuery tables.
 BigQueryIO read and write transforms produce and consume data as a PCollection of dictionaries, 
 where each element in the PCollection represents a single row in the table.   
 Install relevant sdk with `pip install apache-beam[gcp]`  
