@@ -58,6 +58,7 @@ BigQuery supports the following federated data sources,
    - Google drive  
    - Cloud SQL(beta)  
 The supported file formats are Avro,CSV,JSON(newline delimited only),ORC,Parquet.  
+
 Few limitations are,  
    - we cannot reference an external data source in a wildcard table query  
    - query results are not cached  
