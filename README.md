@@ -1,4 +1,4 @@
-This is a repository for creating pipelines using Apache Beam's Python SDK with GCP DataFlow Runner.  
+This is a repository for creating pipelines using Apache Beam's Python SDK with GCP DataFlow Runner & short-lookup notes of GCP data products.   
 
 Notes:-  
 
@@ -63,13 +63,17 @@ Few limitations are,
    - we cannot reference an external data source in a wildcard table query  
    - query results are not cached  
    - Bigtable option is available in certain regions only.  
+   
 Also, if the BigQuery dataset that is created as a **reference** is in a regional location, the Cloud Storage bucket/BigTable containing the data to be queried **must** be in a regional bucket in the same location, likewise for multi regional buckets; however, this doesn't apply to Google drive. It is sensible to relocate BigQuery dataset rather than the federated source.  
 
 To create and maintain a connection resource, the user must have **bigquery.admin** role.  
 When BigQuery connection API is enabled, a service account is automatically created and is used to establish the connection with the federated source.  
-The **EXTERNAL_QUERY()** function is used to query federated sources `SELECT * FROM EXTERNAL_QUERY(connection_id, external_database_query);` 
 
+BigQuery supports querying **externally partitioned** data in Avro, Parquet, ORC, JSON and CSV formats that is stored in **Cloud Storage** using a default *hive(warehouse)* partitioning layout.  
 
+BigQuery supports queries against both personal & shared Google Drive files with CSV,JSON(newline delimitted),Avro,Google sheets formats.   
+
+BigQuery supports creation of permanent & temporary tables for Bigtable, cloud storage & drive, followed by querying by combining a table definition file, inline schema definition, json schema definition; while BigQuery support only temporary table creation with Cloud SQL using *EXTERNAL_QUERY()* function `SELECT * FROM EXTERNAL_QUERY(connection_id, external_database_query);` 
 
 
 
