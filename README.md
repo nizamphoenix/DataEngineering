@@ -1,4 +1,4 @@
-This is a repository for creating pipelines using Apache Beam's Python SDK with GCP DataFlow Runner & short-lookup notes of GCP data products.   
+This is a repository for creating pipelines using Apache Beam's Python SDK with GCP DataFlow Runner & short notes of GCP data products.   
 
 Notes:-  
 
@@ -88,8 +88,9 @@ BigQuery allows to load data from:-
    - Dataflow writes using BigQuery I/O transforms  
 The supported file formats are CSV, Avro, Parquet, ORC, JSON, Firestore exports, Datastore exports.  
 
-When data is loaded into BigQuery, it is converted into columnar format, BigQuery's storage format.  
-BigQuery encodes data in UTF-8, if it can't then it represents the character by a �  
+- When data is loaded into BigQuery, it is converted into columnar format, BigQuery's storage format.  
+- BigQuery encodes data in UTF-8, if it can't then it represents the character by a �  
+- Avro binary format is the *preferred* format for loading both compressed and uncompressed data; parquet, ORC are also good but not preferred; CSV,JSON are used if data is uncompressed and if bandwidth is less then compress with **gzip** only.
 
 
 
