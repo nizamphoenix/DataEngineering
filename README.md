@@ -101,10 +101,50 @@ The supported file formats are CSV, Avro, Parquet, ORC, JSON, Firestore exports,
  data can be exported from BigQuery in multiple formats to Cloud storage only, in chunks of 1GB files, if size is more than 1GB then wildcard characters are used to name files; also DataFlow can be utilised to write a job instead of manually transfering files.  
 
 ### Partitioned tables in BigQuery:-  
-BigQuery tables can be partitioned based on
+It improves query performance, and controls costs by reducing the number of bytes read by a query.  
+
+BigQuery tables can be partitioned(reorganised by creating *logical* segments) based on  
 - ingestion time: data's ingestion (load) date or arrival date  
+  - such tables include a pseudo column named *_PARTITIONTIME* that contains a date-based timestamp  
+  - queries against such tables can restrict the data read by supplying *_PARTITIONTIME* filter in query  
+  - partitions have the same schema definition as the table  
 - timestamp/Date: based on TIMESTAMP or DATE type(s) column  
+  - Each partition created in such table can be considered as a single day of calendar year  
+  - Also 2 special partitions are created:  
+    - __NULL__ partition: represents rows with NULL values in the partitioning column  
+    - __UNPARTITIONED__ partition: represents rows whose DATE column values exists outside the allowed range of dates  
+  - queries against such tables can restrict the data read by supplying *appropriate dates* filter in query  
 - Integer range: based on Integer type(s) column  
+  - create partitions based on a specific INTEGER column, with our choice of start, end, and interval values  
+  - Again like timestamp partition, 2 special partitions are created:  
+    - __NULL__ partition: represents rows with NULL values in the partitioning column  
+    - __UNPARTITIONED__ partition: represents rows whose DATE column values exists outside the allowed range of dates  
+    
+    
+### Clustered tables in BigQuery:-  
+- Table data is automatically re-organized into clusters(partitions) based on the contents of one or more columns.  
+- Currently, BigQuery allows clustering over a **partitioned table** and is not possible for unpartitioned tables.
+- When clustering a table using multiple columns, the order of columns is important since it determines the sort order of the data.  
+- The values of clustering columns are used to organize the data into multiple blocks(like index) in BigQuery storage.  
+- Clustering can improve the performance of queries that use *filter clauses* or *aggregate clauses* . 
+- When a query is submitted that contains a filter clause based on the clustering columns, BigQuery uses the sorted blocks(like index) to eliminate scans of unnecessary data.
+
+
+
+
+### Integer range partitioning v/s clustering:-  
+Both improve query performance and reduce query cost by reducing number of bytes read.  
+
+- Use integer range partitioning if,  
+  - how the data will be partitioned & ranges used to partition the table are known beforehand.  
+  - query cost is **known** before query runs. *dry run* available.  
+  - we like to refer a partition during querying, such as to load data to a specific partition, or delete data from a   specific partition.  
+  
+- Use clustering if,
+  - Do not care how the table will be clustered and hence datais clustered. BigQuery automatically figure out how the data should be clustered for optimal performance and cost.  
+  - query cost is **unknown** before query runs.  *dry run* unavailable.  
+  - Require more than 4,000 partitions since BigQuery has a limit of 4,000 partitions for a partitioned table. No limit for the number of clusters in a table.  
+
 
 
 
