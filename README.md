@@ -58,8 +58,17 @@ BigQuery supports the following federated data sources,
    - Google drive  
    - Cloud SQL(beta)  
 The supported file formats are Avro,CSV,JSON(newline delimited only),ORC,Parquet.  
-Few limitations are, we cannot reference an external data source in a wildcard table query; query results are not cached; Bigtable option is available in certain regions only.  
+Few limitations are,  
+   - we cannot reference an external data source in a wildcard table query  
+   - query results are not cached  
+   - Bigtable option is available in certain regions only.  
 Also, if the BigQuery dataset that is created as a **reference** is in a regional location, the Cloud Storage bucket/BigTable containing the data to be queried **must** be in a regional bucket in the same location, likewise for multi regional buckets; however, this doesn't apply to Google drive. It is sensible to relocate BigQuery dataset rather than the federated source.  
+
+To create and maintain a connection resource, the user must have **bigquery.admin** role.  
+When BigQuery connection API is enabled, a service account is automatically created and is used to establish the connection with the federated source.  
+The **EXTERNAL_QUERY()** function is used to query federated sources `SELECT * FROM EXTERNAL_QUERY(connection_id, external_database_query);` 
+
+
 
 
 
