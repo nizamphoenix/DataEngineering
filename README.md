@@ -76,5 +76,21 @@ BigQuery supports queries against both personal & shared Google Drive files with
 BigQuery supports creation of permanent & temporary tables for Bigtable, cloud storage & drive, followed by querying by combining a table definition file, inline schema definition, json schema definition; while BigQuery support only temporary table creation with Cloud SQL using *EXTERNAL_QUERY()* function `SELECT * FROM EXTERNAL_QUERY(connection_id, external_database_query);` 
 
 
+### Loading data into BigQuery:-  
+It is necessaray to load data into BigQuery as datasets before querying it if the data is not accessable to BigQuery, the data is loaded into a *new table or partition*; however, one may need **not load** data into BigQuery in scenarios like public datasets, shared datasets, federated data sources, logging files; an aside: log files can be exported to Cloud Storage, BigQuery, or Pub/Sub.  
+
+BigQuery allows to load data from:-  
+   - Cloud Storage  
+   - Google services like Ad Manager, Ads, YouTube  
+   - local machine  
+   - streaming inserts i.e. inserting one data instance at a time  
+   - DML inserts performing bulk inserts  
+   - Dataflow writes using BigQuery I/O transforms  
+The supported file formats are CSV, Avro, Parquet, ORC, JSON, Firestore exports, Datastore exports.  
+
+When data is loaded into BigQuery, it is converted into columnar format, BigQuery's storage format.  
+BigQuery encodes data in UTF-8, if it can't then it represents the character by a �  
+
+
 
 
