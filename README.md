@@ -1,4 +1,4 @@
-This is a repository for creating pipelines using Apache Beam's Python SDK with GCP DataFlow Runner & short notes of GCP data products.   
+This is a repository for creating pipelines using Apache Beam's Python SDK with GCP DataFlow Runner and contains short notes of GCP data products.   
 
 Notes:-  
 
@@ -77,20 +77,26 @@ BigQuery supports creation of permanent & temporary tables for Bigtable, cloud s
 
 
 ### Loading data into BigQuery:-  
-It is necessaray to load data into BigQuery as datasets before querying it if the data is not accessable to BigQuery, the data is loaded into a *new table or partition*; however, one may need **not load** data into BigQuery in scenarios like public datasets, shared datasets, federated data sources, logging files; an aside: log files can be exported to Cloud Storage, BigQuery, or Pub/Sub.  
+It is necessaray to load data into BigQuery as datasets before querying it if the data is not accessable to BigQuery, the data is loaded into a *new table or partition*; however, one may need **not load** data into BigQuery in scenarios like public datasets, shared datasets, federated data sources, logging files.  
+
+An aside:- log files can be exported to Cloud Storage, BigQuery, or Pub/Sub.  
 
 BigQuery allows to load data from:-  
-   - Cloud Storage  
-   - Google services like Ad Manager, Ads, YouTube  
-   - local machine  
-   - streaming inserts i.e. inserting one data instance at a time  
-   - DML inserts performing bulk inserts  
-   - Dataflow writes using BigQuery I/O transforms  
+  - Cloud Storage  
+  - Google services(SaaS) like Ad Manager, Ads, YouTube channel reports using   
+  - local machine  
+  - streaming inserts i.e. inserting one data instance at a time  
+  - DML inserts performing bulk inserts  
+  - Dataflow writes using BigQuery I/O transforms  
 The supported file formats are CSV, Avro, Parquet, ORC, JSON, Firestore exports, Datastore exports.  
 
 - When data is loaded into BigQuery, it is converted into columnar format, BigQuery's storage format.  
 - BigQuery encodes data in UTF-8, if it can't then it represents the character by a �  
-- Avro binary format is the *preferred* format for loading both compressed and uncompressed data; parquet, ORC are also good but not preferred; CSV,JSON are used if data is uncompressed and if bandwidth is less then compress with **gzip** only.
+- Avro binary format is the *preferred* format for loading both compressed and uncompressed data; parquet, ORC are also good but not preferred; CSV,JSON are used if data is uncompressed and if bandwidth is less then compress with **gzip** only.  
+- Schema auto-detection is available forJSON or CSV files but unavaibale for Avro files, ORC files, Parquet files, Datastore exports,Firestore exports.  
+- **BigQuery Data transfer service** automatically schedules and manages recurring data loads into BigQuery from Cloud Storage, Google Saas, other vendors(Amazon S3), othe data warehouses.  
+- Wildcard can be used to load multiple files from Cloud Storage, but this option is not available while loading files from local machine.  
+
 
 
 
