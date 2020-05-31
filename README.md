@@ -97,6 +97,14 @@ The supported file formats are CSV, Avro, Parquet, ORC, JSON, Firestore exports,
 - **BigQuery Data transfer service** automatically schedules and manages recurring data loads into BigQuery from Cloud Storage, Google Saas, other vendors(Amazon S3), othe data warehouses.  
 - Wildcard can be used to load multiple files from Cloud Storage, but this option is not available while loading files from local machine.  
 
+### Exporting data from BigQuery:-  
+ data can be exported from BigQuery in multiple formats to Cloud storage only, in chunks of 1GB files, if size is more than 1GB then wildcard characters are used to name files; also DataFlow can be utilised to write a job instead of manually transfering files.  
+
+### Partitioned tables in BigQuery:-  
+BigQuery tables can be partitioned based on
+- ingestion time: data's ingestion (load) date or arrival date  
+- timestamp/Date: based on TIMESTAMP or DATE type(s) column  
+- Integer range: based on Integer type(s) column  
 
 
 
