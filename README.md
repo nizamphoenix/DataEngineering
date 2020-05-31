@@ -40,10 +40,26 @@ The following are required to facilitate the transfer:-
 - Storage transfer service, for regular, or transfers from other cloud vendors  
 - gsutil 
 - distcp, running on cloud storage connector  
-*note:-* Cloud storage connector facilitates high speed transfers, and is used by many GCP services to execute commands to execute tasks like Dataproc to execute spark & hadoop jobs  
+*note:-* Cloud storage connector facilitates high speed transfers, and is used by many GCP services to execute commands to execute tasks, like Cloud Dataproc to execute spark & hadoop jobs  
 
 
-### Preemptible worker nodes in Dataproc  
+### Preemptible worker nodes in Dataproc:-  
 - Only use preemptible nodes for jobs that are fault-tolerant or low priority ones such that occasional job failure won't disrupt the business.  
 - In general, the more preemptible nodes used relative to standard nodes, the higher the chances are that the job won't have enough nodes to complete the task. The best ratio of preemptible to regular nodes for a job can be found by experimenting with different ratios and analyzing the results.  
 - SSDs are not available on preemptible worker nodes. If SSDs are used on dedicated nodes, then any preemptible worker nodes used will have no SSDs available.  
+
+
+### BigQuery - federated queries:-  
+Instead of loading the data, we can create a table that **references** the external(federated) data source & query *directly* even though the data is not stored in BigQuery.  
+BigQuery supports the following federated data sources,  
+   - Bigtable  
+   - Cloud storage  
+   - Google drive  
+   - Cloud SQL(beta)  
+The supported file formats are Avro,CSV,JSON(newline delimited only),ORC,Parquet.  
+Few limitations are, we cannot reference an external data source in a wildcard table query; query results are not cached; Bigtable option is available in certain regions only.  
+Also, if the BigQuery dataset that is created as a **reference** is in a regional location, the Cloud Storage bucket/BigTable containing the data to be queried must be in a regional bucket in the same location, likewise for multi regional buckets; however, this doesn't apply to Google drive.  
+
+
+
+
