@@ -146,6 +146,8 @@ Both improve query performance and reduce query cost by reducing number of bytes
   - Require more than 4,000 partitions since BigQuery has a limit of 4,000 partitions for a partitioned table. No limit for the number of clusters in a table.  
 
 
-
-
+### BigTable imports & exports:-  
+- Dataflow templates are used to export data from Cloud Bigtable as Avro/Parquet/Sequence files and then import the data back into Cloud Bigtable. Also, CSV imports are available but exports aren't.  
+- The Cloud Dataflow connector(part of beam sdk) for Cloud Bigtable is used.  
+- 
 
