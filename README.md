@@ -77,7 +77,7 @@ BigQuery supports creation of permanent & temporary tables for Bigtable, cloud s
 
 
 ### Loading data into BigQuery:-  
-It is necessaray to load data into BigQuery as datasets before querying it if the data is not accessable to BigQuery, the data is loaded into a *new table or partition*; however, one may need **not load** data into BigQuery in scenarios like public datasets, shared datasets, federated data sources, logging files.  
+It is necessaray to load data into BigQuery as datasets before querying it if the data is not accessable to BigQuery, the data is loaded into a *new table or partition*; however, one may need **not load** data into BigQuery in scenarios like public datasets, shared datasets, federated data sources(if speed is not priority), logging files.  
 
 An aside:- log files can be exported to Cloud Storage, BigQuery, or Pub/Sub.  
 
