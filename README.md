@@ -40,7 +40,7 @@ The following are required to facilitate the transfer:-
 - Storage transfer service, for regular, or transfers from other cloud vendors  
 - gsutil 
 - distcp, running on cloud storage connector  
-*note:-* Cloud storage connector facilitates high speed transfers, and is used by many GCP services to execute commands to execute tasks, like Cloud Dataproc to execute spark & hadoop jobs  
+*note:-* Cloud storage connector facilitates petabyte/sec transfers, and is used by many GCP services to execute commands to execute tasks; for instance it is used by Cloud Dataproc to execute spark & hadoop jobs on data stored in cloud storage & hence upholding the principle of separating storage from compute.  
 
 
 ### Preemptible worker nodes in Dataproc:-  
