@@ -15,8 +15,7 @@ Notes:-
 
 <details><summary><b>Reading data into DataFlow pipeline</b> <i>[click to expand]</i></summary>
 <div>
-   ### Reading data into DataFlow pipeline:-
-- reading data using beam's api: O/p PCollection = pipeline | beamAPI(i/p PCollection)  
+- reading data using beam's api: O/p PCollection = pipeline | beamAPI(i/p PCollection)   
    ex:- `lines = p | 'ReadMyFile' >> beam.io.ReadFromText('gs://path_to_file_in_gcs')`    
 - creating & reading data from system's memory: O/p PCollection = pipeline | PCTransform(i/p PCollection)  
    ex:- `lines = (p | beam.Create(somedata))`    
