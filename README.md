@@ -1,4 +1,4 @@
-This is a repository for creating pipelines using Apache Beam's Python SDK with GCP DataFlow Runner and contains short notes of GCP data products.   
+This is a repository about creating pipelines using Apache Beam's Python SDK with GCP DataFlow Runner; also here are some short notes of services offered by GCP, which I used during preparation of GCP data engineer exam.   
 
 Notes:-  
 
