@@ -1,7 +1,7 @@
 This is a repository about creating pipelines using Apache Beam's Python SDK with GCP DataFlow Runner; also here are some short notes of services offered by GCP, which I used during preparation of GCP data engineer exam.   
 
 Notes:-  
-<details><summary><b>Want to build and use your own induced hierarchy?</b> <i>[click to expand]</i></summary>
+<details><summary><b>What is Apache Beam?</b> <i>[click to expand]</i></summary>
 <div>
 **Apache Beam** is a unified framework for creating batch and streaming pipelines.  
 - GCP's Dataflow implements Beam framework that provides unified approach for creating batch & stream pipelines.  
