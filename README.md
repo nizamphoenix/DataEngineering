@@ -1,20 +1,15 @@
 This is a repository about creating pipelines using Apache Beam's Python SDK with GCP DataFlow Runner; also here are some short notes of services offered by GCP, which I used during preparation of GCP data engineer exam.   
 
 Notes:-  
-<details><summary><b>What is Apache Beam?</b> <i>[click to expand]</i></summary>
-<div>
-**Apache Beam** is a unified framework for creating batch and streaming pipelines.  
-- #GCP's Dataflow implements Beam framework that provides unified approach for creating batch & stream pipelines.  
+- **Apache Beam** is a unified framework for creating batch and streaming pipelines.  
+- GCP's Dataflow implements Beam framework that provides unified approach for creating batch & stream pipelines.  
 - Pipeline driver:program to create a pipeline. It defines inputs, transforms, and outputs that constitute the pipeline.  
 - A pipeline runs on a runner: runitme engine that executes pipelines like DataFlow(GCP), samza, flink etc  
 - PipelineOptions: class to configure pipeline for different aspects of your pipeline: runner-type, runner-specific configurations.   
 - PTransform: class extended to define transforms, expand method is overridden.  
 - DoFn: class extended to define ParDo transforms which are suitable for parallel tasks like extracting,formating data, process method is overridden.  
-</div>
-</details>
 
-<details><summary><b>Reading data into DataFlow pipeline</b> <i>[click to expand]</i></summary>
-<div>
+### Reading data into DataFlow pipeline:-  
 - reading data using beam's api: O/p PCollection = pipeline | beamAPI(i/p PCollection)   
    ex:- `lines = p | 'ReadMyFile' >> beam.io.ReadFromText('gs://path_to_file_in_gcs')`    
 - creating & reading data from system's memory: O/p PCollection = pipeline | PCTransform(i/p PCollection)  
