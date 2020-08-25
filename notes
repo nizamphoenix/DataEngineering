@@ -1,0 +1,97 @@
+What is Data Engineer?
+-Collect,store,manage,transform, and present data to make informed decisions.
+linuxacademy GCP bucket--->  gs://la-gcp-labs-resources/data-engineer/dataproc/
+------------------------------------------------------------------------
+Different sections of the Google Cloud Professional Data Engineer Exam 
+------------------------------------------------------------------------
+(Version 1---until 2019)
+1. Designing data processing systems
+2. Building and maintaining data structures and databases
+3. Analysing data and enabling machine learning
+4. Modelling business processes for analysis and optimisation
+5. Ensuring reliability
+6. Visualizing data and advocating policy
+7. Designing for security and compliance
+
+
+(Version 2----2019 onwards)
+1. Designing data processing systems--What choices?
+2. Building and Operationalizing Data Processing Systems--implementing the choices.
+3. Operationalizing Machine Learning Models (most of the changes have happened here) [NEW]
+4. Ensuring Solution Quality
+CHECK THE SITE FOR DETAILS!!!!!
+~ Version1 is cramped into Version2 
+
+-----------------------------------------------------------------------------------------------
+There are three ways to handle late/out-of-order data:
+i) Windows - groups streaming data by timespans eg: (make streaming data into 4 min span window)
+ii) Watermarks - Timestamp by event generation, timestamp at processing steps, pub/sub creation timestamp or source generation time stamp
+iii) Triggers -- Send the data/message when certain conditions are met.
+--------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------
+Slack Notes
+• Some things on the exam weren’t in Linux Academy or A Cloud Guru or the Google Cloud Practice exams (expected)
+• 1 question with a graph of data points and what equation you’d need to cluster them (e.g. cos(X) or X²+Y²)
+• Knowing the difference between Dataflow, Dataproc, Datastore, Bigtable, BigQuery, Pub/Sub and how they can each be used is a must
+• The two case studies in the exam are the exact same as the ones in the practice, though I didn’t read the studies at all during the exam (the questions gave enough insight)
+• Knowing some basic SQL query syntax is very helpful, especially for the BigQuery questions
+• The practice exams provided by Linux Academy and GCP are very similar style questions to the exam, 
+I’d do each of these multiple times and use them to figure out where you’re weak
+• A little rhyme to help with Dataproc: “Dataproc the croc and Hadoop the elephant plan to Spark a fire and cook a Hive of Pigs” (Dataproc deals with Hadoop, Spark, Hive and Pig)
+• “Dataflow is a flowing Beam of light” (Dataflow deals with Apache Beam)
+• “Everyone around the world can relate to a well-made ACID washed Spanner.” (Cloud Spanner is a DB designed for the cloud from the ground up, it’s ACID compliant and globally available)
+• Handy to know the names old school equivalents of relational and non-relational database options (e.g. MongoDB, Cassandra)
+• IAM roles are slightly different for each service but understanding how to seperate users from being able to see data versus design workflows is helpful (e.g. Dataflow Worker role can design workflows but not see the data)
+This is probably enough for now. Mileage will probably vary from each exam. 
+
+Linux Academy’s course will supply 80% of the knowledge.
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+			          Github--coursera links
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+https://github.com/GoogleCloudPlatform/training-data-analyst
+https://github.com/GoogleCloudPlatform/training-data-analyst/blob/master/courses/
+--------------------DataLakes--------------------------------------------------------------
+https://googlecoursera.qwiklabs.com/focuses/46130--BigQueryAnalysis
+https://googlecoursera.qwiklabs.com/focuses/46131--Loading Taxi Data into Google Cloud SQL
+https://googlecoursera.qwiklabs.com/focuses/46133--Loading Data into BigQuery
+https://googlecoursera.qwiklabs.com/focuses/46132--Working with JSON and Array data in BigQuery(Nested,repeated)
+github.com/GoogleCloudPlatform/training-data-analyst/blob/master/courses/data-engineering/demos/nested.md--Nested,repeated
+github.com/GoogleCloudPlatform/training-data-analyst/blob/master/courses/data-engineering/demos/partition.md
+github.com/GoogleCloudPlatform/training-data-analyst/blob/master/courses/data-engineering/demos/clustering.md
+--------------Running batch--------------------------------------------------------------
+https://googlecoursera.qwiklabs.com/focuses/46733---CLoud spark
+https://googlecoursera.qwiklabs.com/focuses/46740---Cloud Data fusion
+https://googlecoursera.qwiklabs.com/focuses/46741---Cloud Composer
+https://googlecoursera.qwiklabs.com/focuses/46735---DataFlow pipeline with python
+https://googlecoursera.qwiklabs.com/focuses/46737---MapReduce with DataFlow
+https://googlecoursera.qwiklabs.com/focuses/46739---SideInputs with DataFlow
+-------------Running streams---------------------------------------------------------------
+https://googlecoursera.qwiklabs.com/focuses/46796----Cloud Pub/Sub
+https://googlecoursera.qwiklabs.com/focuses/46797----Streaming Data Pipelines
+https://googlecoursera.qwiklabs.com/focuses/46798----Streaming analytics dashboard
+https://googlecoursera.qwiklabs.com/focuses/46802----Streaming Data Pipelines into Bigtable
+github.com/GoogleCloudPlatform/training-data-analyst/blob/master/courses/data-engineering/demos/advanced_sql_functions.md
+https://googlecoursera.qwiklabs.com/focuses/46800--Optimizing your BigQuery Queries for Performance
+https://googlecoursera.qwiklabs.com/focuses/46801--partioned tables in BigQuery
+--------------------Smart Analytics----------------------------------------------------------
+https://googlecoursera.qwiklabs.com/focuses/46790-------Using the Natural Language API to classify unstructured text
+https://googlecoursera.qwiklabs.com/focuses/46791-------BigQuery in Jupyter on AI platform 
+https://googlecoursera.qwiklabs.com/focuses/46792-------Running AI models on kubeflow
+https://googlecoursera.qwiklabs.com/focuses/46793-------BigQuery ML----regression
+https://googlecoursera.qwiklabs.com/focuses/46794-------BigQuery ML----recommendation systems
+----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
